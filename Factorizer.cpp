@@ -29,11 +29,11 @@ void Factorizer::getSieve() {
             continue;
         }
 
-        uint64_t a = i * i;
+        uint64_t currentNumber = i * i;
 
-        while (a <= n) {
-            this->sieve[a] = i;
-            a += i;
+        while (currentNumber <= n) {
+            this->sieve[currentNumber] = i;
+            currentNumber += i;
         }
     }
 
@@ -45,13 +45,13 @@ std::vector<uint64_t> Factorizer::getFactors() const {
         return this->factors;
     }
 
-    uint64_t a = this->number;
-    while (this->sieve[a] != 0) {
-        this->factors.push_back(this->sieve[a]);
-        a /= this->sieve[a];
+    uint64_t currentNumber = this->number;
+    while (this->sieve[currentNumber] != 0) {
+        this->factors.push_back(this->sieve[currentNumber]);
+        currentNumber /= this->sieve[currentNumber];
     }
 
-    this->factors.push_back(a);
+    this->factors.push_back(currentNumber);
 
     std::sort(this->factors.begin(), this->factors.end());
 
